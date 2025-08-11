@@ -1,0 +1,21 @@
+<!-- inventory/templates/inventory/transaction_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="transaction-detail">
+    <h2>Transaction Details</h2>
+    
+    <div class="transaction-info">
+        <p><strong>Transaction ID:</strong> {{ transaction.id }}</p>
+        <p><strong>Type:</strong> {{ transaction.get_transaction_type_display }}</p>
+        <p><strong>Date:</strong> {{ transaction.transaction_date }}</p>
+    </div>
+    
+    {% include 'inventory/_transaction_products.html' %}
+    
+    <div class="transaction-actions">
+        <a href="{% url 'some_edit_url' transaction.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'some_list_url' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

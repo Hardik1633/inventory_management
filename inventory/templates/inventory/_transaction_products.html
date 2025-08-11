@@ -1,0 +1,22 @@
+<!-- inventory/templates/inventory/_transaction_products.html -->
+<div class="transaction-products">
+    <h4>Products in this transaction:</h4>
+    {% if transaction.products.exists %}
+    <ul class="product-list">
+        {% for product in transaction.products.all %}
+        <li class="product-item">
+            {{ product.product_name }} ({{ product.product_code }})
+            - Quantity: 
+            {% with detail=transaction.details.get(product=product) %}
+                {{ detail.quantity }} {{ product.unit_of_measure }}
+                {% if detail.unit_price %}
+                at ${{ detail.unit_price }} per unit
+                {% endif %}
+            {% endwith %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-products">No products in this transaction.</p>
+    {% endif %}
+</div>
